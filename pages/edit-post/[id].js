@@ -34,7 +34,7 @@ function EditPost() {
   async function updateCurrentPost() {
     if (!title || !content) return;
     await supabase.from("post").update([{ title, content }]).match({ id });
-    router.push(`/my-posts/${id}`);
+    router.push(`/posts/${id}`);
   }
   return (
     <div className="flex justify-center pt-14 w-full" >
