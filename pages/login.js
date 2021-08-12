@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "/api";
 
@@ -25,8 +24,8 @@ const Login = () => {
   return (
     <div className="flex h-screen w-full justify-center items-center ">
       <div className="flex flex-col w-min h-3/5 justify-evenly shadow-lg p-10 items-center">
-      <span className="text-2xl" >Login</span>
-      <form
+        <span className="text-2xl" >Login</span>
+        <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center mb-5 "
         >
@@ -46,11 +45,9 @@ const Login = () => {
           />
           <button className="bg-blue-500 rounded shadow-lg  w-full p-1" type="submit">Login</button>
         </form>
-        <Link href="/signup">
-          <span>
-            New to nexlog? <span className="underline">SignUp</span>
-          </span>
-        </Link>
+        <span onClick={() => router.push('/signup')} >
+          New to nexlog? <span className="underline">SignUp</span>
+        </span>
       </div>
     </div>
   );

@@ -1,19 +1,16 @@
 import { useRouter } from "next/router";
-import ReactMarkdown from "react-markdown";
 import { supabase } from "../../api";
 
 export default function Post({ post }) {
   const router = useRouter();
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
+  if (router.isFallback) (<div>Loading...</div>)
   return (
     <div className="flex justify-center h-screen w-full pt-20">
       <div className="max-w-sm w-4/5">
-        <h1 className="text-3xl font-semibold tracking-wide">{post.title}</h1>
-        <p className="text-sm font-light my-4">by {post.user_email}</p>
+        <h1 className="text-3xl font-semibold tracking-wide">{post?.title}</h1>
+        <p className="text-sm font-light my-4">by {post?.user_email}</p>
         <div className="mt-8">
-          <ReactMarkdown className="prose" children={post.content} />
+          <span>{post?.content}</span>
         </div>
       </div>
     </div>
@@ -27,7 +24,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths,
-    fallback: true,
+    fallback: true
   };
 }
 
@@ -40,7 +37,7 @@ export async function getStaticProps({ params }) {
     .single();
   return {
     props: {
-      post: data,
+      post: data
     },
   };
 }

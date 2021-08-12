@@ -1,12 +1,13 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { supabase } from "../api";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useRouter } from "next/router"
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter()
   useEffect(() => {
     fetchPosts();
     const mySubscription = supabase
@@ -48,15 +49,14 @@ export default function Home() {
       </Head>
       <div className="flex flex-wrap justify-center gap-10 w-full pt-14 p-10 ">
         {posts.map((post) => (
-          <Link key={post.id} href={`/posts/${post.id}`}>
-            <div className="flex flex-col justify-evenly cursor-pointer w-11/12 md:max-w-11/12 md:w-72 h-32 border-b border-gray-300	mt-8 pb-4">
+            <div key={post.id} onClick={() => router.push(`/posts/${post.id}`)}  className="flex flex-col justify-start cursor-pointer w-11/12 md:max-w-11/12 md:w-72 h-32 border-b border-gray-300	mt-8 pb-4">
               <h2 className="text-xl font-semibold">{post.title}</h2>
               <p className="text-gray-500 ">Author: {post.user_email}</p>
               <p className="text-gray-500 ">{truncate(post.content,
-                        50
+                        100
                     )}</p>
             </div>
-          </Link>
+  
         ))}
       </div>
     </div>

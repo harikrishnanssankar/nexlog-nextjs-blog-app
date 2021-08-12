@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { v4 as uuid } from "uuid";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
@@ -17,17 +16,6 @@ function CreatePost() {
   function onChange(e) {
     setPost(() => ({ ...post, [e.target.name]: e.target.value }));
   }
-//   async function createNewPost() {
-//     if (!title || !content) return;
-//     const user = supabase.auth.user();
-//     const id = uuid();
-//     post.id = id;
-//     const { data } = await supabase
-//       .from("posts")
-//       .insert([{ title, content, user_id: user.id, user_email: user.email }])
-//       .single();
-//     router.push(`/posts/${data.id}`);
-//   }
   async function createNewPost() {
     if (!title || !content) return;
     const user = supabase.auth.user();
