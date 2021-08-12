@@ -51,7 +51,7 @@ export default function Home() {
         {posts.map((post) => (
             <div key={post.id} onClick={() => router.push(`/posts/${post.id}`)}  className="flex flex-col justify-start cursor-pointer w-11/12 md:max-w-11/12 md:w-72 h-32 border-b border-gray-300	mt-8 pb-4">
               <h2 className="text-xl font-semibold">{post.title}</h2>
-              <p className="text-gray-500 ">Author: {post.user_email}</p>
+              <p className="text-sm text-gray-500 ">Author: {truncate(post.user_email,30)}</p>
               <p className="text-gray-500 ">{truncate(post.content,
                         100
                     )}</p>
