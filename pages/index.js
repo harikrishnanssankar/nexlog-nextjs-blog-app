@@ -19,7 +19,7 @@ export default function Home() {
     return () => supabase.removeSubscription(mySubscription);
   }, []);
   async function fetchPosts() {
-    const { data, error } = await supabase.from("post").select();
+    const { data, error } = await supabase.from("post").select().order('inserted_at', {ascending: false});
     setPosts(data);
     setLoading(false);
   }
@@ -49,12 +49,10 @@ export default function Home() {
       </Head>
       <div className="flex flex-wrap justify-center gap-10 w-full pt-14 p-10 ">
         {posts.map((post) => (
-            <div key={post.id} onClick={() => router.push(`/posts/${post.id}`)}  className="flex flex-col justify-start cursor-pointer w-11/12 md:max-w-11/12 md:w-72 h-32 border-b border-gray-300	mt-8 pb-4">
-              <h2 className="text-xl font-semibold">{post.title}</h2>
+            <div key={post.id} onClick={() => router.push(`/posts/${post.id}`)}  className="flex flex-col justify-start cursor-pointer w-11/12 md:max-w-11/12 md:w-72 h-38 border-b border-gray-300	mt-8 pb-4">
+              <h2 className="text-xl font-semibold">{truncate(post.title,50)}</h2>
               <p className="text-sm text-gray-500 ">Author: {truncate(post.user_email,30)}</p>
-              <p className="text-gray-500 ">{truncate(post.content,
-                        100
-                    )}</p>
+              <p className="text-gray-500 ">{truncate(post.content,100)}</p>
             </div>
   
         ))}

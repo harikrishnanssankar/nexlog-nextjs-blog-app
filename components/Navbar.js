@@ -13,15 +13,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="absolute w-full flex items-center justify-between p-1 md:p-4 border-b border-gray-300">
+    <nav className="absolute shadow-sm w-full flex items-center justify-between p-1 md:p-4 border-b border-gray-300">
       <span
         onClick={() => router.push("/")}
-        className="text-xl md:text-2xl ml-4 md:ml-7 mr-6 cursor-pointer z-20"
+        className="text-xl text-gray-600 md:text-2xl ml-4 md:ml-7 mr-6 cursor-pointer z-20"
       >
         NexLog
       </span>
       <div className="hidden md:flex items-center justify-between w-full gap-3 relative">
-        <span onClick={() => router.push("/")} className="mr-6 cursor-pointer">
+        <span onClick={() => router.push("/")} className="text-gray-600 mr-6 cursor-pointer">
           Home
         </span>
         {user ? (
@@ -29,21 +29,22 @@ const Navbar = () => {
             <div>
               <span
                 onClick={() => router.push("/my-posts")}
-                className="mr-6 cursor-pointer"
+                className="text-gray-600 mr-6 cursor-pointer"
               >
                 My Posts
               </span>
               <span
                 onClick={() => router.push("/profile")}
-                className="mr-6 cursor-pointer"
+                className=" text-gray-600 mr-6 cursor-pointer"
               >
                 Profile
               </span>
               <span
                 onClick={() => {
                   supabase.auth.signOut();
+                  router.push('/login')
                 }}
-                className="mr-6 cursor-pointer"
+                className=" text-gray-600 mr-6 cursor-pointer"
               >
                 logout
               </span>
@@ -52,7 +53,7 @@ const Navbar = () => {
         ) : (
           <span
             onClick={() => router.push("/login")}
-            className="mr-6 cursor-pointer"
+            className="text-gray-600 mr-6 cursor-pointer"
           >
             Login
           </span>
@@ -103,6 +104,7 @@ const Navbar = () => {
                 <span
                   onClick={() => {
                     supabase.auth.signOut();
+                    router.push('/login')
                     setOpen(!open);
                   }}
                   className="shadow-sm pb-2 pt-2 cursor-pointer w-full text-center"
@@ -130,14 +132,19 @@ const Navbar = () => {
           </span>
         </div>
       )}
-      <span
-        onClick={() => {
-          router.push("/create-post");
-        }}
-        className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-full text-2xl fixed bottom-8 right-8"
-      >
-        +
-      </span>
+      {
+        user &&
+        <div className="flex shadow-lg items-center justify-center cursor-pointer hover:bg-blue-500 bg-blue-600 w-10 h-10 rounded-full fixed bottom-8 right-8" >
+          <span
+            onClick={() => {
+              router.push("/create-post");
+            }}
+            className="text-white text-2xl"
+          >
+            +
+          </span>
+        </div>
+      }
     </nav>
   );
 };

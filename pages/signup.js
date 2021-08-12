@@ -41,10 +41,10 @@ const Signup = () => {
             className="border p-1 rounded mb-4"
             type="password"
           />
-          <button className="bg-blue-500 rounded shadow-lg  w-full p-1" type="submit">SignUp</button>
+          <button className="bg-blue-500 rounded shadow-lg text-white w-full p-1" type="submit">SignUp</button>
         </form>
-        <span onClick={() => router.push('/login')} >
-          Already nexlog user? <span className="underline">Login</span>
+        <span className="text-sm" onClick={() => router.push('/login')} >
+          Already nexlog user? <span className="cursor-pointer underline">Login</span>
         </span>
       </div>
     </div>

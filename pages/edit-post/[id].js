@@ -34,13 +34,13 @@ function EditPost() {
   async function updateCurrentPost() {
     if (!title || !content) return;
     await supabase.from("post").update([{ title, content }]).match({ id });
-    router.push("/my-posts");
+    router.push(`/my-posts/${id}`);
   }
   return (
-    <div clasName="w-full" >
-      <div className="flex flex-col items-center w-4/5 max-w-sm ml-auto mr-auto pt-14">
-        <h1 className="text-2xl font-semibold tracking-wide md:mt-4 mb-0">
-          Edit post
+    <div className="flex justify-center pt-14 w-full" >
+      <div className="flex flex-col items-center w-4/5 max-w-screen-lg ">
+        <h1 className="text-3xl font-semibold tracking-wide mt-6">
+          Edit Post
         </h1>
         <input
           onChange={onChange}
@@ -50,6 +50,7 @@ function EditPost() {
           className="border-b pb-1 text-lg my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
         />
         <SimpleMDE
+          className="z-0"
           value={post.content}
           onChange={(value) => setPost({ ...post, content: value })}
         />

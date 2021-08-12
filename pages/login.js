@@ -43,10 +43,10 @@ const Login = () => {
             className="border p-1 rounded mb-4"
             type="password"
           />
-          <button className="bg-blue-500 rounded shadow-lg  w-full p-1" type="submit">Login</button>
+          <button className="bg-blue-500 text-white rounded shadow-lg  w-full p-1" type="submit">Login</button>
         </form>
-        <span onClick={() => router.push('/signup')} >
-          New to nexlog? <span className="underline">SignUp</span>
+        <span className="text-sm" onClick={() => router.push('/signup')} >
+          New to nexlog? <span className="cursor-pointer underline">SignUp</span>
         </span>
       </div>
     </div>

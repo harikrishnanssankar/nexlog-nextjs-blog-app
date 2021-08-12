@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
 import { supabase } from "../api";
+import { AuthContext } from "../store/Context";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -10,6 +11,7 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
 const initialState = { title: "", content: "" };
 
 function CreatePost() {
+  const { user } = useContext(AuthContext)
   const [post, setPost] = useState({});
   const { title, content } = post;
   const router = useRouter();
@@ -25,6 +27,9 @@ function CreatePost() {
       .single();
     router.push(`/`);
   }
+  if(!user)  return (
+    <div className="pt-20 pl-10" >Access Denied</div>
+  )
   return (
     <div className="flex justify-center pt-14 w-full" >
       <div className="flex flex-col items-center w-4/5 max-w-screen-lg ">
