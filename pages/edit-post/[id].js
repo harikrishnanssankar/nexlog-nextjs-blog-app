@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
 import { supabase } from "../../api";
+import Head from "next/head";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -38,6 +39,10 @@ function EditPost() {
   }
   return (
     <div className="flex justify-center pt-14 w-full" >
+       <Head>
+        <title>Edit: {post.title}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="flex flex-col items-center w-4/5 max-w-screen-lg ">
         <h1 className="text-3xl font-semibold tracking-wide mt-6">
           Edit Post

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import ReactMarkdown from "react-markdown";
 import { supabase } from "../../api";
@@ -24,6 +25,10 @@ export default function Post({ post }) {
   const createdAt = new Date(rectifyFormat(post.inserted_at))
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full pt-20">
+      <Head>
+        <title>{post.title}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="md:max-w-2xl w-11/12 mb-20 ">
         <h1 className="text-3xl font-semibold tracking-wide">{post.title}</h1>
         <div className="flex items-center justify-between" >
