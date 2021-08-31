@@ -4,25 +4,34 @@ import { supabase } from "../api";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useRouter } from "next/router"
 
-export default function Home() {
-  const [posts, setPosts] = useState([]);
+export default function Home({posts}) {
+  console.log(posts);
+  // const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter()
   useEffect(() => {
-    fetchPosts();
-    const mySubscription = supabase
-      .from("posts")
-      .on("*", () => {
-        fetchPosts();
-      })
-      .subscribe();
-    return () => supabase.removeSubscription(mySubscription);
-  }, []);
-  async function fetchPosts() {
-    const { data, error } = await supabase.from("post").select().order('inserted_at', {ascending: false});
-    setPosts(data);
-    setLoading(false);
-  }
+    if (posts) {
+      setLoading(false)
+    }
+    return () => {
+      
+    }
+  }, [posts])
+  // useEffect(() => {
+  //   fetchPosts();
+  //   const mySubscription = supabase
+  //     .from("posts")
+  //     .on("*", () => {
+  //       fetchPosts();
+  //     })
+  //     .subscribe();
+  //   return () => supabase.removeSubscription(mySubscription);
+  // }, []);
+  // async function fetchPosts() {
+  //   const { data, error } = await supabase.from("post").select().order('inserted_at', {ascending: false});
+  //   setPosts(data);
+  //   setLoading(false);
+  // }
   const truncate = (string, n) => {
     return string && string.length > n
       ? string.substr(0, n - 1) + "..."
@@ -59,4 +68,14 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+
+export async function getServerSideProps() {
+  const { data, error } = await supabase.from("post").select().order('inserted_at', {ascending: false});
+  return{
+    props: {
+      posts: data
+    }
+  }
 }
