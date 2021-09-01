@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { supabase } from "../api";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function MyPosts() {
   const [posts, setPosts] = useState([]);
@@ -33,7 +34,7 @@ export default function MyPosts() {
   return (
     <div className="pt-14">
        <Head>
-        <title>{post.title}</title>
+        <title>My Post | Nexlog</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1 className="text-2xl font-semibold tracking-wide mt-4 ml-10 mb-2">
