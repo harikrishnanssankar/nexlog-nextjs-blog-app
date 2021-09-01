@@ -5,7 +5,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useRouter } from "next/router"
 
 export default function Home({posts}) {
-  console.log(posts);
   // const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter()
@@ -63,7 +62,6 @@ export default function Home({posts}) {
               <p className="text-sm text-gray-500 ">Author: {truncate(post.user_email,30)}</p>
               <p className="text-gray-500 ">{truncate(post.content,100)}</p>
             </div>
-  
         ))}
       </div>
     </div>
